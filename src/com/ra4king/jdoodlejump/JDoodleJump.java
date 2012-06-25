@@ -620,7 +620,7 @@ public class JDoodleJump extends Game {
 					g.drawImage(getArt().get("taptochange"),0,30,null);
 			}
 		}
-			
+		
 		if(level.getScore().getHighScore() > 0) {
 			g.setFont(new Font(Font.SANS_SERIF,Font.BOLD,15));
 			g.drawString("highscore",350,20);

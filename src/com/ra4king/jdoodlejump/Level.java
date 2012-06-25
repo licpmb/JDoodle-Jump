@@ -28,7 +28,7 @@ public class Level extends GameWorld {
 	private int mouseSpeed = 600;
 	private int mouseX;
 	
-	private long startTime;
+	private long startTime, pauseTime, pauseStart;
 	
 	public Level() {
 		score = new Score();
@@ -144,6 +144,20 @@ public class Level extends GameWorld {
 	}
 	
 	@Override
+	public void paused() {
+		super.paused();
+		
+		pauseStart = System.currentTimeMillis();
+	}
+	
+	@Override
+	public void resumed() {
+		super.resumed();
+		
+		pauseTime += System.currentTimeMillis()-pauseStart;
+	}
+	
+	@Override
 	public JDoodleJump getGame() {
 		return (JDoodleJump)super.getGame();
 	}
@@ -215,7 +229,7 @@ public class Level extends GameWorld {
 				
 				gameOver();
 				
-				getGame().submit(score.getInt(),System.currentTimeMillis()-startTime,isNewHighscore);
+				getGame().submit(score.getInt(),System.currentTimeMillis()-startTime-pauseTime,isNewHighscore);
 			}
 		}
 		catch(Exception exc) {
@@ -256,6 +270,7 @@ public class Level extends GameWorld {
 		getGame().setScreen("GameWorld");
 		
 		startTime = System.currentTimeMillis();
+		pauseTime = 0;
 		
 		getGame().resume();
 	}
