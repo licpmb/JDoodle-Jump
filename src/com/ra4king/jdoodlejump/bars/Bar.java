@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 
 import com.ra4king.gameutils.gameworld.GameComponent;
+import com.ra4king.gameutils.gameworld.GameWorld;
 import com.ra4king.jdoodlejump.Doodle;
 import com.ra4king.jdoodlejump.monsters.StationaryMonster;
 import com.ra4king.jdoodlejump.powerups.PowerUp;
@@ -18,6 +19,19 @@ public abstract class Bar extends GameComponent {
 	
 	public Bar(String b) {
 		this.bar = b;
+	}
+	
+	@Override
+	public void init(GameWorld world) {
+		super.init(world);
+		show();
+	}
+	
+	@Override
+	public void show() {
+		barImage = getParent().getGame().getArt().get(bar);
+		setWidth(barImage.getWidth(null));
+		setHeight(barImage.getHeight(null));
 	}
 	
 	public void installMonster(StationaryMonster m) {
@@ -90,14 +104,6 @@ public abstract class Bar extends GameComponent {
 	public void setBar(String bar) {
 		this.bar = bar;
 		show();
-	}
-	
-	@Override
-	public void show() {
-		super.show();
-		barImage = getParent().getGame().getArt().get(bar);
-		setWidth(barImage.getWidth(null));
-		setHeight(barImage.getHeight(null));
 	}
 	
 	@Override

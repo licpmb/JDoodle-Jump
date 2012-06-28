@@ -72,7 +72,7 @@ public class JDoodleJump extends Game {
 		super(500,
 			  500,
 			  Runtime.getRuntime().availableProcessors() >= 4 ? 200 : 120,
-			  6.7);
+			  6.71);
 	}
 	
 	@Override
