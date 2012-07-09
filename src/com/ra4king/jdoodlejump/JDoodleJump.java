@@ -567,10 +567,7 @@ public class JDoodleJump extends Game {
 	
 	@Override
 	public void focusLost() {
-		if(getScreenName().equals("Main Menu") || getScreenName().equals("Highscores Menu"))
-			return;
-		
-		if(!isMultiplayer)
+		if(getScreenName().equals("GameWorld") && !isMultiplayer)
 			pause();
 	}
 	
