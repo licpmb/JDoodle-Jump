@@ -154,7 +154,10 @@ public class Level extends GameWorld {
 	public void resumed() {
 		super.resumed();
 		
-		pauseTime += System.currentTimeMillis()-pauseStart;
+		if(pauseStart > 0)
+			pauseTime += System.currentTimeMillis()-pauseStart;
+		
+		pauseStart = 0;
 	}
 	
 	@Override
