@@ -282,6 +282,7 @@ public class HighScores extends Widget {
 						p.writeString(name);
 						p.writeInt(points);
 						p.writeLong(duration);
+						p.writeBoolean(getParent().getGame().isApplet());
 						io.write(p);
 						
 						p = new Packet();
