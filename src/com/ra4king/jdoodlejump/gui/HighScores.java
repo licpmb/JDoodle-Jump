@@ -380,7 +380,7 @@ public class HighScores extends Widget {
 				
 				return score;
 			}
-			catch(Exception exc) {
+			catch(Throwable exc) {
 				exc.printStackTrace();
 				return 0;
 			}
