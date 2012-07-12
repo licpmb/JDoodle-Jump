@@ -14,7 +14,6 @@ import java.awt.event.MouseEvent;
 import java.awt.geom.Rectangle2D;
 import java.net.URL;
 
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import com.ra4king.gameutils.Game;
@@ -514,8 +513,8 @@ public class JDoodleJump extends Game {
 				play.setText("Loading..." + (int)(((double)(themes.getLoaderStatus()+soundLoader.getStatus())/(double)(themes.getTotalImages()+soundLoader.getTotal()))*100) + "%");
 				
 				if(themes.getLoaderStatus()+soundLoader.getStatus() == themes.getTotalImages()+soundLoader.getTotal()) {
-					if(getRootParent() instanceof JFrame) {
-						((JFrame)getRootParent()).setIconImage(getArt().get("doodle"));
+					if(!isApplet()) {
+						((Frame)getRootParent()).setIconImage(getArt().get("doodle"));
 					}
 					
 					getSound().setOn(true);
