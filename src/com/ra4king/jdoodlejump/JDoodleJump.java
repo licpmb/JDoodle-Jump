@@ -91,8 +91,7 @@ public class JDoodleJump extends Game {
 			// Themes themes = Themes.getThemes();
 			// while(themes.getLoaderStatus()+soundLoader.getStatus() < themes.getTotalImages()+soundLoader.getTotal())
 			// Thread.sleep(100);
-		}
-		catch(Exception exc) {
+		} catch(Exception exc) {
 			exc.printStackTrace();
 			if(!isApplet())
 				System.exit(0);
