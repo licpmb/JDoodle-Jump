@@ -1,6 +1,5 @@
 package com.ra4king.jdoodlejump;
 
-
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
@@ -30,7 +29,6 @@ import com.ra4king.jdoodlejump.powerups.RocketPowerUp;
 import com.ra4king.jdoodlejump.powerups.ShieldPowerUp;
 import com.ra4king.jdoodlejump.powerups.SpringShoesPowerUp;
 
-
 public strictfp class Multiplayer extends GameWorld {
 	private SocketPacketIO io;
 	
@@ -46,7 +44,7 @@ public strictfp class Multiplayer extends GameWorld {
 		this.io = io;
 		io.setBlocking(false);
 		
-		score = new Score();		
+		score = new Score();
 		
 		buildWorld();
 	}
@@ -68,8 +66,8 @@ public strictfp class Multiplayer extends GameWorld {
 				switch(keyCode) {
 					case KeyEvent.VK_SPACE:
 						if(!doodle.isShooting() && doodle.isAbleToShoot()) {
-							lastBullet = (Bullet)add(2,new Bullet(score,new Point2D.Double(doodle.getX()+doodle.getWidth()/2,doodle.getY()),
-											new Point2D.Double(doodle.getX()+doodle.getWidth()/2,doodle.getY()-100)));
+							lastBullet = (Bullet)add(2, new Bullet(score, new Point2D.Double(doodle.getX() + doodle.getWidth() / 2, doodle.getY()),
+									new Point2D.Double(doodle.getX() + doodle.getWidth() / 2, doodle.getY() - 100)));
 							doodle.setShooting(true);
 							game.getSound().play("shoot");
 						}
@@ -93,7 +91,7 @@ public strictfp class Multiplayer extends GameWorld {
 					return;
 				
 				if(me.getButton() == MouseEvent.BUTTON1 && doodle.isAbleToShoot() && lastBullet == null) {
-					lastBullet = (Bullet)add(2,new Bullet(score,new Point2D.Double(doodle.getX()+doodle.getWidth()/2,doodle.getY()),new Point2D.Double(me.getX(),me.getY()-getYOffset())));
+					lastBullet = (Bullet)add(2, new Bullet(score, new Point2D.Double(doodle.getX() + doodle.getWidth() / 2, doodle.getY()), new Point2D.Double(me.getX(), me.getY() - getYOffset())));
 					doodle.setShooting(true);
 					game.getSound().play("shoot");
 				}
@@ -128,16 +126,16 @@ public strictfp class Multiplayer extends GameWorld {
 		
 		out.writeByte((byte)0);
 		
-		try{
+		try {
 			out.writeLong(deltaTime);
 			
 			if(getGame().getInput().isKeyDown(KeyEvent.VK_LEFT) || getGame().getInput().isKeyDown(KeyEvent.VK_A)) {
-				doodle.setX(doodle.getX()-(doodleSpeed*(deltaTime/1e9)));
+				doodle.setX(doodle.getX() - (doodleSpeed * (deltaTime / 1e9)));
 				doodle.setFacingRight(false);
 				out.writeInt(-1);
 			}
 			else if(getGame().getInput().isKeyDown(KeyEvent.VK_RIGHT) || getGame().getInput().isKeyDown(KeyEvent.VK_D)) {
-				doodle.setX(doodle.getX()+(doodleSpeed*(deltaTime/1e9)));
+				doodle.setX(doodle.getX() + (doodleSpeed * (deltaTime / 1e9)));
 				doodle.setFacingRight(true);
 				out.writeInt(1);
 			}
@@ -169,44 +167,44 @@ public strictfp class Multiplayer extends GameWorld {
 					opponent.setFacingRight(p.readBoolean());
 					
 					if(p.readInt() == 1) {
-						add(new Bullet(null,new Point2D.Double(p.readDouble(),p.readDouble()),new Point2D.Double(p.readDouble(),p.readDouble())));
+						add(new Bullet(null, new Point2D.Double(p.readDouble(), p.readDouble()), new Point2D.Double(p.readDouble(), p.readDouble())));
 						opponent.setShooting(true);
 					}
-					else if(System.currentTimeMillis()/100%10 == 0)
+					else if(System.currentTimeMillis() / 100 % 10 == 0)
 						opponent.setShooting(false);
 				}
 				else if(id == -1) {
 					if(p.hasMore()) {
-						JOptionPane.showMessageDialog(getGame(),(p.readInt() == 1 ? "You win!" : "You lose!"));
+						JOptionPane.showMessageDialog(getGame(), (p.readInt() == 1 ? "You win!" : "You lose!"));
 						gameOver();
 					}
 					else
 						throw new IOException();
 				}
 				else {
-					JOptionPane.showMessageDialog(getGame(),"GOT ID: " + id);
+					JOptionPane.showMessageDialog(getGame(), "GOT ID: " + id);
 				}
 			}
 			
-			if(doodle.getX()+doodle.getWidth()/2 > getWidth())
-				doodle.setX(-doodle.getWidth()/2);
-			else if(doodle.getX()+doodle.getWidth()/2 < 0)
-				doodle.setX(getWidth()-doodle.getWidth()/2);
+			if(doodle.getX() + doodle.getWidth() / 2 > getWidth())
+				doodle.setX(-doodle.getWidth() / 2);
+			else if(doodle.getX() + doodle.getWidth() / 2 < 0)
+				doodle.setX(getWidth() - doodle.getWidth() / 2);
 			
 			super.update(deltaTime);
 			
-			if(doodle.getY()+getYOffset() > limit && limit > getHeight()/2) {
-				limit -= (300*(deltaTime/1e9));
+			if(doodle.getY() + getYOffset() > limit && limit > getHeight() / 2) {
+				limit -= (300 * (deltaTime / 1e9));
 				
-				if(limit < getHeight()/2)
-					limit = getHeight()/2;
+				if(limit < getHeight() / 2)
+					limit = getHeight() / 2;
 				
-				double dist = doodle.getY()+getYOffset()-limit;
+				double dist = doodle.getY() + getYOffset() - limit;
 				
 				setYOffset(getYOffset() - dist);
 			}
-			if(doodle.getY()+getYOffset() <= getHeight()/2) {
-				double dist = getHeight()/2-(doodle.getY()+getYOffset());
+			if(doodle.getY() + getYOffset() <= getHeight() / 2) {
+				double dist = getHeight() / 2 - (doodle.getY() + getYOffset());
 				score.add(dist);
 				
 				setYOffset(getYOffset() + dist);
@@ -215,14 +213,12 @@ public strictfp class Multiplayer extends GameWorld {
 			if(doodle.isHit()) {
 				gameOver();
 			}
-		}
-		catch(IOException exc) {
-			JOptionPane.showMessageDialog(getGame(),"Your opponent has disconnected!");
+		} catch(IOException exc) {
+			JOptionPane.showMessageDialog(getGame(), "Your opponent has disconnected!");
 			gameOver();
-		}
-		catch(Exception exc) {
+		} catch(Exception exc) {
 			exc.printStackTrace();
-			JOptionPane.showMessageDialog(getGame(),"<html>ERROR!<br />Error message: " + exc);
+			JOptionPane.showMessageDialog(getGame(), "<html>ERROR!<br />Error message: " + exc);
 			gameOver();
 		}
 	}
@@ -233,12 +229,12 @@ public strictfp class Multiplayer extends GameWorld {
 		
 		g.setColor(Color.black);
 		g.drawString("yOffset: " + getYOffset(), 200, 10);
-		g.drawString("opponent X: " + opponent.getX(), 200,20);
+		g.drawString("opponent X: " + opponent.getX(), 200, 20);
 		g.drawString("opponent Y: " + opponent.getY(), 200, 30);
 	}
 	
 	public void gameOver() {
-		//getGame().setScreen("Menus");
+		// getGame().setScreen("Menus");
 		
 		try {
 			Packet p = new Packet();
@@ -246,8 +242,7 @@ public strictfp class Multiplayer extends GameWorld {
 			io.write(p);
 			
 			while(io.read() == null);
-		}
-		catch(Exception exc) {
+		} catch(Exception exc) {
 			exc.printStackTrace();
 		}
 		
@@ -263,8 +258,8 @@ public strictfp class Multiplayer extends GameWorld {
 			Packet p;
 			while((p = io.read()) == null);
 			
-			doodle = (Doodle)add(3,new Doodle(score,true));
-			opponent = (Doodle)add(3,new Doodle(score,false));
+			doodle = (Doodle)add(3, new Doodle(score, true));
+			opponent = (Doodle)add(3, new Doodle(score, false));
 			
 			doodle.setX(p.readDouble());
 			doodle.setY(p.readDouble());
@@ -278,48 +273,49 @@ public strictfp class Multiplayer extends GameWorld {
 				byte a = p.readByte();
 				switch(p.readByte()) {
 					case 1:
-						add(a,new StationaryBar(p.readDouble(),p.readDouble()));
+						add(a, new StationaryBar(p.readDouble(), p.readDouble()));
 						break;
 					case 2:
-						add(a,new MovingBar(p.readDouble(),p.readDouble(),p.readDouble(),p.readBoolean()));
+						add(a, new MovingBar(p.readDouble(), p.readDouble(), p.readDouble(), p.readBoolean()));
 						break;
 					case 3:
-						add(a,new DisappearingBar(p.readDouble(),p.readDouble()));
+						add(a, new DisappearingBar(p.readDouble(), p.readDouble()));
 						break;
 					case 4:
-						add(a,new BreakingBar(p.readDouble(),p.readDouble()));
+						add(a, new BreakingBar(p.readDouble(), p.readDouble()));
 						break;
 					case 5:
-						add(a,new StationaryMonster(p.readByte(), p.readByte())).setLocation(p.readDouble(), p.readDouble());
+						add(a, new StationaryMonster(p.readByte(), p.readByte())).setLocation(p.readDouble(), p.readDouble());
 						break;
 					case 6:
 						byte num = p.readByte();
 						byte hitsTotal = p.readByte();
-						add(a,new MovingMonster(num,p.readDouble(),p.readDouble(),hitsTotal));
+						add(a, new MovingMonster(num, p.readDouble(), p.readDouble(), hitsTotal));
 						break;
 					case 7:
-						p.readByte(); p.readByte();
-						add(a,new AlienMonster(p.readDouble(),p.readDouble()));
+						p.readByte();
+						p.readByte();
+						add(a, new AlienMonster(p.readDouble(), p.readDouble()));
 						break;
 					case 8:
-						p.readByte(); p.readByte();
-						add(a,new BlackHoleMonster(p.readDouble(),p.readDouble()));
+						p.readByte();
+						p.readByte();
+						add(a, new BlackHoleMonster(p.readDouble(), p.readDouble()));
 					case 9:
-						add(a,new CopterHatPowerUp()).setLocation(p.readDouble(),p.readDouble());
+						add(a, new CopterHatPowerUp()).setLocation(p.readDouble(), p.readDouble());
 						break;
 					case 10:
-						add(a,new RocketPowerUp()).setLocation(p.readDouble(),p.readDouble());
+						add(a, new RocketPowerUp()).setLocation(p.readDouble(), p.readDouble());
 						break;
 					case 11:
-						add(a,new SpringShoesPowerUp()).setLocation(p.readDouble(), p.readDouble());
+						add(a, new SpringShoesPowerUp()).setLocation(p.readDouble(), p.readDouble());
 						break;
 					case 12:
-						add(a,new ShieldPowerUp()).setLocation(p.readDouble(),p.readDouble());
+						add(a, new ShieldPowerUp()).setLocation(p.readDouble(), p.readDouble());
 						break;
 				}
 			}
-		}
-		catch(Exception exc) {
+		} catch(Exception exc) {
 			exc.printStackTrace();
 			gameOver();
 		}

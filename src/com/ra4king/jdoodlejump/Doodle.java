@@ -48,7 +48,7 @@ public class Doodle extends GameComponent {
 		
 		facingRight = true;
 		
-		feetBounds = new Rectangle2D.Double(getX(),getY(),getWidth(),getHeight());
+		feetBounds = new Rectangle2D.Double(getX(), getY(), getWidth(), getHeight());
 	}
 	
 	public double getMaxVelocityY() {
@@ -163,12 +163,12 @@ public class Doodle extends GameComponent {
 	@Override
 	public Rectangle2D.Double getBounds() {
 		Rectangle2D.Double bounds = super.getBounds();
-		bounds.setFrame(getX()+5,getY()+8,getWidth()-10,getHeight()-15);
+		bounds.setFrame(getX() + 5, getY() + 8, getWidth() - 10, getHeight() - 15);
 		return bounds;
 	}
 	
 	private Rectangle2D.Double getFeetBounds() {
-		feetBounds.setFrame(getX()+5,getY()+getHeight()-intersectionDist-1,getWidth()-10,intersectionDist);
+		feetBounds.setFrame(getX() + 5, getY() + getHeight() - intersectionDist - 1, getWidth() - 10, intersectionDist);
 		return feetBounds;
 	}
 	
@@ -191,17 +191,18 @@ public class Doodle extends GameComponent {
 	public void update(long deltaTime) {
 		if(isUpdating) {
 			if(powerup == null || powerup.isDoodleJumping()) {
-				vy -= (g*(deltaTime/1e9));
+				vy -= (g * (deltaTime / 1e9));
 				
-				if(vy < -maxVY) vy = -maxVY;
+				if(vy < -maxVY)
+					vy = -maxVY;
 			}
 			
-			setY(getY()-(vy*(deltaTime/1e9)));
+			setY(getY() - (vy * (deltaTime / 1e9)));
 		}
 		
 		if(!isDying) {
 			if(isUpdating) {
-				if(getScreenY()+getHeight()/2 > getParent().getHeight()) {
+				if(getScreenY() + getHeight() / 2 > getParent().getHeight()) {
 					isDying = true;
 					getParent().getGame().getSound().play("fall");
 					return;
@@ -228,11 +229,11 @@ public class Doodle extends GameComponent {
 						hasJumped = true;
 					}
 					else if(e instanceof Monster && ((Monster)e).isJumpable() && ((Monster)e).getJumpBounds().intersects(getFeetBounds())) {
-						if(vy < maxVY+300) {
+						if(vy < maxVY + 300) {
 							if(powerup == null || powerup.isDoodleJumping()) {
-								vy = maxVY+300;
+								vy = maxVY + 300;
 								if(isUpdating) {
-									setY(e.getY()-getHeight());
+									setY(e.getY() - getHeight());
 								}
 								getParent().getGame().getSound().play("bounce");
 							}
@@ -281,7 +282,7 @@ public class Doodle extends GameComponent {
 			}
 		}
 		else {
-			if(getScreenY()-50 > getParent().getHeight())
+			if(getScreenY() - 50 > getParent().getHeight())
 				isHit = true;
 		}
 	}
@@ -295,32 +296,32 @@ public class Doodle extends GameComponent {
 			double scale = this.scale;
 			
 			if(scale != 1) {
-				g.translate(getX() - xos + getWidth()/2, getY() - yos + getHeight()/2);
+				g.translate(getX() - xos + getWidth() / 2, getY() - yos + getHeight() / 2);
 				g.scale(scale, scale);
-				g.translate(-(getX() - xos + getWidth()/2), -(getY() - yos + getHeight()/2));
+				g.translate(-(getX() - xos + getWidth() / 2), -(getY() - yos + getHeight() / 2));
 			}
 			
 			if(isShooting)
-				g.drawImage(doodleShooting,getIntX(),(int)Math.round(getY()-12),null);
+				g.drawImage(doodleShooting, getIntX(), (int)Math.round(getY() - 12), null);
 			else if(facingRight)
-				g.drawImage(doodle,getIntX()-xos,getIntY()-yos,null);
+				g.drawImage(doodle, getIntX() - xos, getIntY() - yos, null);
 			else {
-				g.scale(-1,1);
-				g.drawImage(doodle,-(getIntX()+getIntWidth()+xos),getIntY()-yos,null);
-				g.scale(-1,1);
+				g.scale(-1, 1);
+				g.drawImage(doodle, -(getIntX() + getIntWidth() + xos), getIntY() - yos, null);
+				g.scale(-1, 1);
 			}
 			
 			if(isDying) {
 				g.setColor(Color.yellow);
-				g.fill(new Ellipse2D.Double(getX()-5,getY()-5,getWidth()+10,10));
+				g.fill(new Ellipse2D.Double(getX() - 5, getY() - 5, getWidth() + 10, 10));
 			}
 		}
 		
 		if(Themes.getThemes().isDebug()) {
-			g.setColor(new Color(255,0,0,200));
+			g.setColor(new Color(255, 0, 0, 200));
 			g.fill(getBounds());
 			
-			g.setColor(new Color(0,0,255,200));
+			g.setColor(new Color(0, 0, 255, 200));
 			g.fill(getFeetBounds());
 		}
 	}

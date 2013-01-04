@@ -4,7 +4,6 @@ import java.awt.Graphics2D;
 
 import com.ra4king.jdoodlejump.Doodle;
 
-
 public class CopterHatPowerUp extends PowerUp {
 	private long time;
 	
@@ -45,11 +44,11 @@ public class CopterHatPowerUp extends PowerUp {
 		doodle.setInvincible(true);
 		doodle.setAbleToShoot(false);
 		
-		setX(doodle.getX() + (doodle.getWidth()-getWidth())/2);
+		setX(doodle.getX() + (doodle.getWidth() - getWidth()) / 2);
 		setY(doodle.getY() - getHeight() + 10);
 		
 		time += deltaTime;
-		if(time >= getParent().getGame().getSound().get("copter").getMicrosecondLength()*1000) {
+		if(time >= getParent().getGame().getSound().get("copter").getMicrosecondLength() * 1000) {
 			doodle.uninstallPowerUp(this);
 			doodle.setInvincible(false);
 			doodle.setAbleToShoot(true);
@@ -58,7 +57,7 @@ public class CopterHatPowerUp extends PowerUp {
 	
 	@Override
 	public void draw(Graphics2D g) {
-		if(getDoodle() != null && System.currentTimeMillis()/10%2 == 0) {
+		if(getDoodle() != null && System.currentTimeMillis() / 10 % 2 == 0) {
 			if(getPowerUp().equals("powerup1"))
 				setPowerUp("powerup1alt");
 			else

@@ -14,7 +14,7 @@ public class Test extends Game {
 	}
 	
 	public Test() {
-		super(500,500);
+		super(500, 500);
 	}
 	
 	@Override
@@ -25,6 +25,6 @@ public class Test extends Game {
 		
 		page.add(new ToggleButton());
 		
-		setScreen("MenuPage",page);
+		setScreen("MenuPage", page);
 	}
 }

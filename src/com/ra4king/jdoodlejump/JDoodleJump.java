@@ -44,13 +44,13 @@ public class JDoodleJump extends Game {
 			if(Desktop.isDesktopSupported())
 				Desktop.getDesktop().browse(new URL("http://www.ra4king.com/games/JDoodleJump/JDoodleJump.jnlp").toURI());
 			else
-				JOptionPane.showMessageDialog(null,"Please visit http://www.ra4king.com/games/JDoodleJump and download the latest update.");
+				JOptionPane.showMessageDialog(null, "Please visit http://www.ra4king.com/games/JDoodleJump and download the latest update.");
 			
 			System.exit(0);
 		}
 		
 		JDoodleJump game = new JDoodleJump();
-		game.setupFrame("JDoodle Jump",false);
+		game.setupFrame("JDoodle Jump", false);
 		game.start();
 	}
 	
@@ -69,9 +69,9 @@ public class JDoodleJump extends Game {
 	
 	public JDoodleJump() {
 		super(500,
-			  500,
-			  Runtime.getRuntime().availableProcessors() >= 4 ? 200 : 120,
-			  6.71);
+				500,
+				Runtime.getRuntime().availableProcessors() >= 4 ? 200 : 120,
+				6.71);
 	}
 	
 	@Override
@@ -80,17 +80,17 @@ public class JDoodleJump extends Game {
 		
 		level = new Level();
 		level.setBackground("background");
-		addScreen("GameWorld",level);
+		addScreen("GameWorld", level);
 		
 		menus = new Menus();
-		setScreen("Menus",menus);
+		setScreen("Menus", menus);
 		
-		try{
+		try {
 			loadResources();
 			
-//			Themes themes = Themes.getThemes();
-//			while(themes.getLoaderStatus()+soundLoader.getStatus() < themes.getTotalImages()+soundLoader.getTotal())
-//				Thread.sleep(100);
+			// Themes themes = Themes.getThemes();
+			// while(themes.getLoaderStatus()+soundLoader.getStatus() < themes.getTotalImages()+soundLoader.getTotal())
+			// Thread.sleep(100);
 		}
 		catch(Exception exc) {
 			exc.printStackTrace();
@@ -98,57 +98,57 @@ public class JDoodleJump extends Game {
 				System.exit(0);
 		}
 		
-//		try {
-//			SocketPacketIO io = new SocketPacketIO("ra4king.com",5052,80*1024);
-//			Packet p = new Packet();
-//			p.writeString("DoodleJump game");
-//			io.write(p);
-//			
-//			p = new Packet();
-//			p.writeInt(0);
-//			p.writeString("ra4king","roi4ever");
-//			io.write(p);
-//			
-//			if(io.read().readInt() == 0)
-//				System.out.println("LOGGED IN!");
-//			else
-//				throw new Exception();
-//			
-//			p = new Packet();
-//			p.writeInt(0);
-//			io.write(p);
-//			
-//			System.out.println("Waiting for match.");
-//			
-//			while((p = io.read()).readInt() == 0)
-//				System.out.println("waiting...");
-//			
-//			System.out.println("NEW MATCH! Player #" + p.readInt());
-//			
-//			level = new Multiplayer(io);
-//			setScreen("GameWorld",level);
-//			
-//			level.setBackground("background");
-//			
-//			return;
-//		}
-//		catch(Exception exc) {
-//			exc.printStackTrace();
-//			System.exit(0);
-//		}
+		// try {
+		// SocketPacketIO io = new SocketPacketIO("ra4king.com",5052,80*1024);
+		// Packet p = new Packet();
+		// p.writeString("DoodleJump game");
+		// io.write(p);
+		//
+		// p = new Packet();
+		// p.writeInt(0);
+		// p.writeString("ra4king","roi4ever");
+		// io.write(p);
+		//
+		// if(io.read().readInt() == 0)
+		// System.out.println("LOGGED IN!");
+		// else
+		// throw new Exception();
+		//
+		// p = new Packet();
+		// p.writeInt(0);
+		// io.write(p);
+		//
+		// System.out.println("Waiting for match.");
+		//
+		// while((p = io.read()).readInt() == 0)
+		// System.out.println("waiting...");
+		//
+		// System.out.println("NEW MATCH! Player #" + p.readInt());
+		//
+		// level = new Multiplayer(io);
+		// setScreen("GameWorld",level);
+		//
+		// level.setBackground("background");
+		//
+		// return;
+		// }
+		// catch(Exception exc) {
+		// exc.printStackTrace();
+		// System.exit(0);
+		// }
 		
-		//MAIN MENU
-		mainMenu = menus.addPage("Main Menu",new MenuPage(menus));
+		// MAIN MENU
+		mainMenu = menus.addPage("Main Menu", new MenuPage(menus));
 		mainMenu.setBackground("background");
 		
 		if(!isJavaWS && !isApplet()) {
-			mainMenu.add(new Label("PLEASE DELETE THIS GAME",25,getWidth()/2,20,true));
-			mainMenu.add(new Label("AND DOWNLOAD NEW FROM WEBSITE!!",25,getWidth()/2,50,true));
+			mainMenu.add(new Label("PLEASE DELETE THIS GAME", 25, getWidth() / 2, 20, true));
+			mainMenu.add(new Label("AND DOWNLOAD NEW FROM WEBSITE!!", 25, getWidth() / 2, 50, true));
 		}
 		
 		if(isApplet()) {
-			titleLabel = (Label)mainMenu.add(new Label("JDoodle Jump",Color.blue,50,getWidth()/2,100,true));
-			play = (Button)mainMenu.add(new Button("Loading... 0%",40,150,160,75,75,false,new Button.Action() {
+			titleLabel = (Label)mainMenu.add(new Label("JDoodle Jump", Color.blue, 50, getWidth() / 2, 100, true));
+			play = (Button)mainMenu.add(new Button("Loading... 0%", 40, 150, 160, 75, 75, false, new Button.Action() {
 				public void doAction(Button b) {
 					level.newGame();
 				}
@@ -156,7 +156,7 @@ public class JDoodleJump extends Game {
 			play.setBackgroundGradient(Color.orange);
 			play.setEnabled(false);
 			
-			Button highscores = (Button)mainMenu.add(new Button("High Scores!",40,180,235,75,75,false,new Button.Action() {
+			Button highscores = (Button)mainMenu.add(new Button("High Scores!", 40, 180, 235, 75, 75, false, new Button.Action() {
 				@Override
 				public void doAction(Button b) {
 					menus.setMenuPageShown("Highscores Menu");
@@ -164,14 +164,14 @@ public class JDoodleJump extends Game {
 			}));
 			highscores.setBackgroundGradient(Color.orange);
 			
-			Button download = (Button)mainMenu.add(new Button("Download!",40,250,310,75,75,false,new Button.Action() {
+			Button download = (Button)mainMenu.add(new Button("Download!", 40, 250, 310, 75, 75, false, new Button.Action() {
 				@Override
 				public void doAction(Button b) {
 					new Thread() {
 						@Override
 						public void run() {
 							try {
-								SocketPacketIO io = new SocketPacketIO("ra4king.is-a-geek.net",5050);
+								SocketPacketIO io = new SocketPacketIO("ra4king.is-a-geek.net", 5050);
 								
 								Packet p = new Packet();
 								p.writeString("DoodleJump game");
@@ -187,21 +187,23 @@ public class JDoodleJump extends Game {
 								
 								io.close();
 							}
-							catch(Exception exc) {}
+							catch(Exception exc) {
+							}
 						}
 					}.start();
 					
 					try {
 						getAppletContext().showDocument(new URL("http://www.ra4king.com/games/JDoodleJump/JDoodleJump.jnlp"));
 					}
-					catch(Exception exc) {}
+					catch(Exception exc) {
+					}
 				}
 			}));
 			download.setBackgroundGradient(Color.orange);
 		}
 		else {
-			titleLabel = (Label)mainMenu.add(new Label("JDoodle Jump",Color.blue,50,getWidth()/2,100,true));
-			play = (Button)mainMenu.add(new Button("Loading... 0%",50,getWidth()/2-20,getHeight()/2-20,75,75,true,new Button.Action() {
+			titleLabel = (Label)mainMenu.add(new Label("JDoodle Jump", Color.blue, 50, getWidth() / 2, 100, true));
+			play = (Button)mainMenu.add(new Button("Loading... 0%", 50, getWidth() / 2 - 20, getHeight() / 2 - 20, 75, 75, true, new Button.Action() {
 				@Override
 				public void doAction(Button b) {
 					level.newGame();
@@ -210,7 +212,7 @@ public class JDoodleJump extends Game {
 			play.setBackgroundGradient(Color.orange);
 			play.setEnabled(false);
 			
-			Button highscores = (Button)mainMenu.add(new Button("High Scores",50,getWidth()/2+68,getHeight()/2+80,75,75,true,new Button.Action() {
+			Button highscores = (Button)mainMenu.add(new Button("High Scores", 50, getWidth() / 2 + 68, getHeight() / 2 + 80, 75, 75, true, new Button.Action() {
 				@Override
 				public void doAction(Button b) {
 					menus.setMenuPageShown("Highscores Menu");
@@ -219,12 +221,12 @@ public class JDoodleJump extends Game {
 			highscores.setBackgroundGradient(Color.orange);
 		}
 		
-		//HIGHSCORES MENU
-		MenuPage hsMenu = menus.addPage("Highscores Menu",new MenuPage(menus));
+		// HIGHSCORES MENU
+		MenuPage hsMenu = menus.addPage("Highscores Menu", new MenuPage(menus));
 		hsMenu.setBackground("background");
 		
 		highScores = (HighScores)hsMenu.add(new HighScores(getVersion()));
-		Button bkBtn = (Button)hsMenu.add(new Button("Back to Main Menu",20,getWidth()/2,100,50,50,true,new Button.Action() {
+		Button bkBtn = (Button)hsMenu.add(new Button("Back to Main Menu", 20, getWidth() / 2, 100, 50, 50, true, new Button.Action() {
 			@Override
 			public void doAction(Button b) {
 				menus.setMenuPageShown("Main Menu");
@@ -234,14 +236,14 @@ public class JDoodleJump extends Game {
 		
 		level.getScore().setHighScore(highScores.readFromCookie());
 		
-		//GAMEOVER MENU
-		final MenuPage gameOverMenu = menus.addPage("GameOver Menu",new MenuPage(menus));
+		// GAMEOVER MENU
+		final MenuPage gameOverMenu = menus.addPage("GameOver Menu", new MenuPage(menus));
 		gameOverMenu.setBackground("background");
 		
-		gameOverMenu.add(new Label("Game Over!",30,getWidth()/2,100,true));
-		scoreLabel = (Label)gameOverMenu.add(new Label("Score: ",30,getWidth()/2,150,true));
-		highscoreLabel = (Label)gameOverMenu.add(new Label("Highscore: ",30,getWidth()/2,200,true));
-		Button playAgain = (Button)gameOverMenu.add(new Button("Play Again!",40,getWidth()/2,getHeight()/2+30,75,75,true,new Button.Action() {
+		gameOverMenu.add(new Label("Game Over!", 30, getWidth() / 2, 100, true));
+		scoreLabel = (Label)gameOverMenu.add(new Label("Score: ", 30, getWidth() / 2, 150, true));
+		highscoreLabel = (Label)gameOverMenu.add(new Label("Highscore: ", 30, getWidth() / 2, 200, true));
+		Button playAgain = (Button)gameOverMenu.add(new Button("Play Again!", 40, getWidth() / 2, getHeight() / 2 + 30, 75, 75, true, new Button.Action() {
 			@Override
 			public void doAction(Button b) {
 				level.newGame();
@@ -249,7 +251,7 @@ public class JDoodleJump extends Game {
 		}));
 		playAgain.setBackgroundGradient(Color.orange);
 		
-		Button backToMainMenu = (Button)gameOverMenu.add(new Button("Main Menu",35,375,getHeight()/2+180,75,75,true,new Button.Action() {
+		Button backToMainMenu = (Button)gameOverMenu.add(new Button("Main Menu", 35, 375, getHeight() / 2 + 180, 75, 75, true, new Button.Action() {
 			@Override
 			public void doAction(Button b) {
 				menus.setMenuPageShown("Main Menu");
@@ -257,7 +259,7 @@ public class JDoodleJump extends Game {
 		}));
 		backToMainMenu.setBackgroundGradient(Color.orange);
 		
-		Button highscores = (Button)gameOverMenu.add(new Button("High Scores",35,150,getHeight()/2+120,75,75,true,new Button.Action() {
+		Button highscores = (Button)gameOverMenu.add(new Button("High Scores", 35, 150, getHeight() / 2 + 120, 75, 75, true, new Button.Action() {
 			@Override
 			public void doAction(Button b) {
 				menus.setMenuPageShown("Highscores Menu");
@@ -276,27 +278,27 @@ public class JDoodleJump extends Game {
 			}
 		};
 		
-		addInputListener(mainMenu,newGameListener);
-		addInputListener(gameOverMenu,newGameListener);
+		addInputListener(mainMenu, newGameListener);
+		addInputListener(gameOverMenu, newGameListener);
 		
-		//MAIN MENU INPUT LISTENERS
-		InputAdapter nameListener =  new InputAdapter() {
+		// MAIN MENU INPUT LISTENERS
+		InputAdapter nameListener = new InputAdapter() {
 			@Override
 			public void mousePressed(MouseEvent me, Screen screen) {
-				if(screen == mainMenu && new Rectangle(253,390,230,30).contains(me.getPoint())) {
+				if(screen == mainMenu && new Rectangle(253, 390, 230, 30).contains(me.getPoint())) {
 					try {
 						if(isApplet())
 							getAppletContext().showDocument(new URL("http://www.facebook.com/RoisWebsite"), "_blank");
 						else if(Desktop.isDesktopSupported())
 							Desktop.getDesktop().browse(new URL("http://www.facebook.com/RoisWebsite").toURI());
 						else
-							JOptionPane.showMessageDialog(null,"Visit my Facebook page at www.facebook.com/RoisWebsite!");
+							JOptionPane.showMessageDialog(null, "Visit my Facebook page at www.facebook.com/RoisWebsite!");
 						
 						new Thread() {
 							@Override
 							public void run() {
 								try {
-									SocketPacketIO io = new SocketPacketIO("ra4king.is-a-geek.net",5050);
+									SocketPacketIO io = new SocketPacketIO("ra4king.is-a-geek.net", 5050);
 									
 									Packet p = new Packet();
 									p.writeString("DoodleJump game");
@@ -312,7 +314,8 @@ public class JDoodleJump extends Game {
 									
 									io.close();
 								}
-								catch(Exception exc) {}
+								catch(Exception exc) {
+								}
 							}
 						}.start();
 					}
@@ -322,19 +325,19 @@ public class JDoodleJump extends Game {
 				}
 				
 				if(highScores.getName() != null) {
-					FontMetrics fm = getGraphics().getFontMetrics(new Font(Font.SANS_SERIF,Font.BOLD,20));
-					Rectangle2D.Double rect = new Rectangle2D.Double(120,0,fm.stringWidth(highScores.getName()),fm.getHeight());
+					FontMetrics fm = getGraphics().getFontMetrics(new Font(Font.SANS_SERIF, Font.BOLD, 20));
+					Rectangle2D.Double rect = new Rectangle2D.Double(120, 0, fm.stringWidth(highScores.getName()), fm.getHeight());
 					
-					if(rect.contains(me.getX(),me.getY())) {
+					if(rect.contains(me.getX(), me.getY())) {
 						String name = "";
 						while(name.equals("")) {
-							name = JOptionPane.showInputDialog(getRootParent(),"Type your name:");
+							name = JOptionPane.showInputDialog(getRootParent(), "Type your name:");
 							
 							if(name == null)
 								return;
 							else if(name.length() > 25) {
-								JOptionPane.showMessageDialog(getRootParent(),"Names longer than 25 character are not allowed.");
-								name =  "";
+								JOptionPane.showMessageDialog(getRootParent(), "Names longer than 25 character are not allowed.");
+								name = "";
 							}
 							else
 								name = name.trim();
@@ -356,39 +359,39 @@ public class JDoodleJump extends Game {
 	
 	private void loadResources() throws Exception {
 		String themeNames[] = {
-			"normal",
-			"winter",
-			"jungle",
-			"pygmy",
-			"underwater",
-			"space"
+								"normal",
+								"winter",
+								"jungle",
+								"pygmy",
+								"underwater",
+								"space"
 		};
 		
 		String imageNames[] = {
-			"alien.png",
-			"background.png",
-			"bar.png",
-			"blackhole.png",
-			"breakingbar.png",
-			"brokenbar.png",
-			"bullet.png",
-			"disappearingbar.png",
-			"doodle.png",
-			"doodle shooting.png",
-			"horizmovingbar.png",
-			"monster1.png",
-			"monster2.png",
-			"monster3.png",
-			"monster4.png",
-			"monster5.png",
-			"monster6.png",
-			"powerup1.png",
-			"powerup1alt.png",
-			"powerup2.png",
-			"powerup2alt.png",
-			"powerup3.png",
-			"powerup3alt.png",
-			"vertmovingbar.png"
+								"alien.png",
+								"background.png",
+								"bar.png",
+								"blackhole.png",
+								"breakingbar.png",
+								"brokenbar.png",
+								"bullet.png",
+								"disappearingbar.png",
+								"doodle.png",
+								"doodle shooting.png",
+								"horizmovingbar.png",
+								"monster1.png",
+								"monster2.png",
+								"monster3.png",
+								"monster4.png",
+								"monster5.png",
+								"monster6.png",
+								"powerup1.png",
+								"powerup1alt.png",
+								"powerup2.png",
+								"powerup2alt.png",
+								"powerup3.png",
+								"powerup3alt.png",
+								"vertmovingbar.png"
 		};
 		
 		String images[][] = new String[themeNames.length][imageNames.length];
@@ -407,23 +410,23 @@ public class JDoodleJump extends Game {
 				images[a][b] = "images/".concat(themeNames[a]).concat("/").concat(imageNames[b]);
 		
 		String soundFiles[] = {
-			"sounds/blackhole.ogg",
-			"sounds/boom.ogg",
-			"sounds/bounce.ogg",
-			"sounds/break.ogg",
-			"sounds/copter.ogg",
-			"sounds/fall.ogg",
-			"sounds/hitnfall.ogg",
-			"sounds/jump.ogg",
-			"sounds/moan.ogg",
-			"sounds/monsters.ogg",
-			"sounds/monsterdeath.ogg",
-			"sounds/rocket.ogg",
-			"sounds/spring.ogg",
-			"sounds/shoot.ogg",
-			"sounds/ufoabduct.ogg",
-			"sounds/ufodeath.ogg",
-			"sounds/ufos.ogg"
+								"sounds/blackhole.ogg",
+								"sounds/boom.ogg",
+								"sounds/bounce.ogg",
+								"sounds/break.ogg",
+								"sounds/copter.ogg",
+								"sounds/fall.ogg",
+								"sounds/hitnfall.ogg",
+								"sounds/jump.ogg",
+								"sounds/moan.ogg",
+								"sounds/monsters.ogg",
+								"sounds/monsterdeath.ogg",
+								"sounds/rocket.ogg",
+								"sounds/spring.ogg",
+								"sounds/shoot.ogg",
+								"sounds/ufoabduct.ogg",
+								"sounds/ufodeath.ogg",
+								"sounds/ufos.ogg"
 		};
 		
 		Themes themes = Themes.getThemes();
@@ -457,28 +460,28 @@ public class JDoodleJump extends Game {
 		switch(themes.getCurrentTheme()) {
 			case 0:
 				titleLabel.setTextPaint(Color.blue);
-				themes.putSetting("doodleXOffset",0);
-				themes.putSetting("doodleYOffset",0);
+				themes.putSetting("doodleXOffset", 0);
+				themes.putSetting("doodleYOffset", 0);
 				break;
 			case 1:
 				titleLabel.setTextPaint(Color.yellow);
-				themes.putSetting("doodleXOffset",16);
-				themes.putSetting("doodleYOffset",15);
+				themes.putSetting("doodleXOffset", 16);
+				themes.putSetting("doodleYOffset", 15);
 				break;
 			case 2:
 				titleLabel.setTextPaint(Color.red);
-				themes.putSetting("doodleXOffset",6);
-				themes.putSetting("doodleYOffset",0);
+				themes.putSetting("doodleXOffset", 6);
+				themes.putSetting("doodleYOffset", 0);
 				break;
 			case 3:
 				titleLabel.setTextPaint(Color.blue);
-				themes.putSetting("doodleXOffset",4);
-				themes.putSetting("doodleYOffset",13);
+				themes.putSetting("doodleXOffset", 4);
+				themes.putSetting("doodleYOffset", 13);
 				break;
 			case 4:
 				titleLabel.setTextPaint(Color.yellow);
-				themes.putSetting("doodleXOffset",3);
-				themes.putSetting("doodleYOffset",0);
+				themes.putSetting("doodleXOffset", 3);
+				themes.putSetting("doodleYOffset", 0);
 				break;
 			case 5:
 				titleLabel.setTextPaint(Color.yellow);
@@ -493,7 +496,7 @@ public class JDoodleJump extends Game {
 	void submit(int score, long duration, boolean isNewHighscore) {
 		String oldName = highScores.getName();
 		
-		highScores.submitScore(score,duration,isNewHighscore);
+		highScores.submitScore(score, duration, isNewHighscore);
 		
 		checkSexy(oldName);
 	}
@@ -509,10 +512,10 @@ public class JDoodleJump extends Game {
 	public void update(long deltaTime) {
 		if(!isMultiplayer && !hasFinishedLoading) {
 			Themes themes = Themes.getThemes();
-			try{
-				play.setText("Loading..." + (int)(((double)(themes.getLoaderStatus()+soundLoader.getStatus())/(double)(themes.getTotalImages()+soundLoader.getTotal()))*100) + "%");
+			try {
+				play.setText("Loading..." + (int)(((double)(themes.getLoaderStatus() + soundLoader.getStatus()) / (double)(themes.getTotalImages() + soundLoader.getTotal())) * 100) + "%");
 				
-				if(themes.getLoaderStatus()+soundLoader.getStatus() == themes.getTotalImages()+soundLoader.getTotal()) {
+				if(themes.getLoaderStatus() + soundLoader.getStatus() == themes.getTotalImages() + soundLoader.getTotal()) {
 					if(!isApplet()) {
 						((Frame)getRootParent()).setIconImage(getArt().get("doodle"));
 					}
@@ -527,17 +530,16 @@ public class JDoodleJump extends Game {
 					hasFinishedLoading = true;
 				}
 				else if(themes.getLoaderStatus() == -1) {
-					JOptionPane.showMessageDialog(JDoodleJump.this,"Error extracting images!");
+					JOptionPane.showMessageDialog(JDoodleJump.this, "Error extracting images!");
 					play.setText("ERROR");
 					hasFinishedLoading = true;
 				}
 				else if(soundLoader.getStatus() == -1) {
-					JOptionPane.showMessageDialog(JDoodleJump.this,"Error extracting sounds!");
+					JOptionPane.showMessageDialog(JDoodleJump.this, "Error extracting sounds!");
 					play.setText("ERROR");
 					hasFinishedLoading = true;
 				}
-			}
-			catch(Exception exc) {
+			} catch(Exception exc) {
 				exc.printStackTrace();
 			}
 		}
@@ -546,7 +548,7 @@ public class JDoodleJump extends Game {
 			if(lastTime == 0)
 				lastTime = System.nanoTime();
 			
-			if(deltaTime < 1e9/60) {
+			if(deltaTime < 1e9 / 60) {
 				totalCount += deltaTime;
 				count++;
 			}
@@ -591,9 +593,8 @@ public class JDoodleJump extends Game {
 				frame.dispose();
 				getSound().setOn(false);
 				while(highScores.isNetworkActive());
-					Thread.sleep(100);
-			}
-			catch(Exception exc) {
+				Thread.sleep(100);
+			} catch(Exception exc) {
 				exc.printStackTrace();
 			}
 		}
@@ -609,58 +610,58 @@ public class JDoodleJump extends Game {
 		
 		if(!isMultiplayer) {
 			if(highScores.getName() != null) {
-				g.setFont(new Font(Font.SANS_SERIF,Font.BOLD,20));
-				g.drawString(highScores.getName(),120,20);
+				g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 20));
+				g.drawString(highScores.getName(), 120, 20);
 				
 				if(getScreenName().equals("Main Menu") || getScreenName().equals("GameOver Menu"))
-					g.drawImage(getArt().get("taptochange"),0,30,null);
+					g.drawImage(getArt().get("taptochange"), 0, 30, null);
 			}
 		}
 		
 		if(level.getScore().getHighScore() > 0) {
-			g.setFont(new Font(Font.SANS_SERIF,Font.BOLD,15));
-			g.drawString("highscore",350,20);
-			g.setFont(new Font(Font.SANS_SERIF,Font.BOLD,20));
-			g.drawString(""+level.getScore().getHighScore(),425,20);
+			g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 15));
+			g.drawString("highscore", 350, 20);
+			g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 20));
+			g.drawString("" + level.getScore().getHighScore(), 425, 20);
 		}
 		
 		if(getScreenName().equals("GameWorld")) {
-			g.setFont(new Font(Font.SANS_SERIF,Font.BOLD,30));
-			g.drawString("" + level.getScore().getLong(),10,30);
+			g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
+			g.drawString("" + level.getScore().getLong(), 10, 30);
 			
 			if(isPaused()) {
-				g.setColor(new Color(100,100,100,75));
-				g.fillRect(0,0,getWidth(),getHeight());
+				g.setColor(new Color(100, 100, 100, 75));
+				g.fillRect(0, 0, getWidth(), getHeight());
 				g.setColor(Color.blue);
-				g.setFont(new Font(Font.SANS_SERIF,Font.BOLD,30));
-				g.drawString("PAUSED",200,250);
+				g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
+				g.drawString("PAUSED", 200, 250);
 				
 				g.setColor(Color.black);
-				g.setFont(new Font(Font.SANS_SERIF,Font.BOLD,20));
+				g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 20));
 				g.drawString("Press 'P' to resume", 165, 280);
 			}
 		}
 		else if(getScreenName().equals("Main Menu")) {
 			drawThemeChooser(g);
-			g.drawImage(getArt().get("facebook-like"),getWidth()-247,getHeight()-110,null);
+			g.drawImage(getArt().get("facebook-like"), getWidth() - 247, getHeight() - 110, null);
 			g.setColor(Color.blue);
-			g.setFont(new Font(Font.SANS_SERIF,Font.BOLD,15));
-			g.drawString("Like me on Facebook!",getWidth()-170,getHeight()-90);
+			g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 15));
+			g.drawString("Like me on Facebook!", getWidth() - 170, getHeight() - 90);
 		}
 		
 		g.setColor(Color.black);
 	}
 	
-	private Polygon left = new Polygon(new int[] {10,25,25},new int[] {getHeight()-30,getHeight()-40,getHeight()-20},3);
-	private Polygon right = new Polygon(new int[] {490,475,475},new int[] {getHeight()-30,getHeight()-40,getHeight()-20},3);
+	private Polygon left = new Polygon(new int[] { 10, 25, 25 }, new int[] { getHeight() - 30, getHeight() - 40, getHeight() - 20 }, 3);
+	private Polygon right = new Polygon(new int[] { 490, 475, 475 }, new int[] { getHeight() - 30, getHeight() - 40, getHeight() - 20 }, 3);
 	
 	private void drawThemeChooser(Graphics2D g) {
 		Themes themes = Themes.getThemes();
 		Point p = getInput().getCurrentMouseLocation();
 		MouseEvent p2 = getInput().getLastMousePressed();
 		
-		g.drawImage(getArt().get("levels"),-currentTheme*getWidth(),getHeight()-60,null);
-		g.drawImage(getArt().get("leveltear"),0,getHeight()-60,null);
+		g.drawImage(getArt().get("levels"), -currentTheme * getWidth(), getHeight() - 60, null);
+		g.drawImage(getArt().get("leveltear"), 0, getHeight() - 60, null);
 		
 		g.setColor(Color.red);
 		if(currentTheme > 0) {
@@ -675,7 +676,7 @@ public class JDoodleJump extends Game {
 				currentTheme--;
 		}
 		
-		if(currentTheme < themes.getTotalThemes()-1) {
+		if(currentTheme < themes.getTotalThemes() - 1) {
 			g.setColor(Color.red);
 			g.fill(right);
 			
@@ -698,7 +699,7 @@ public class JDoodleJump extends Game {
 			
 			gameWorld = new GameWorld();
 			gameWorld.init(JDoodleJump.this);
-			gameWorld.setBackground(new Color(0,0,0,0));
+			gameWorld.setBackground(new Color(0, 0, 0, 0));
 			
 			MenuPage page = (MenuPage)parent;
 			
@@ -707,12 +708,12 @@ public class JDoodleJump extends Game {
 		
 		@Override
 		public void show() {
-			Doodle d = (Doodle)gameWorld.add(1,new Doodle(null,true));
+			Doodle d = (Doodle)gameWorld.add(1, new Doodle(null, true));
 			d.setX(60);
 			d.setY(470);
 			d.setVelocityY(d.getMaxVelocityY());
 			d.show();
-			gameWorld.add(new StationaryBar(50,400)).show();
+			gameWorld.add(new StationaryBar(50, 400)).show();
 		}
 		
 		@Override

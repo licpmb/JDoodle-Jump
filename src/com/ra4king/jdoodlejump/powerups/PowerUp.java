@@ -1,13 +1,11 @@
 package com.ra4king.jdoodlejump.powerups;
 
-
 import java.awt.Graphics2D;
 import java.awt.Image;
 
 import com.ra4king.gameutils.gameworld.GameComponent;
 import com.ra4king.jdoodlejump.Doodle;
 import com.ra4king.jdoodlejump.bars.Bar;
-
 
 public abstract class PowerUp extends GameComponent {
 	private Image powerupImage;
@@ -20,7 +18,8 @@ public abstract class PowerUp extends GameComponent {
 	}
 	
 	public void setBar(Bar bar) {
-		if(doodle != null) throw new IllegalArgumentException("Doodle is not null.");
+		if(doodle != null)
+			throw new IllegalArgumentException("Doodle is not null.");
 		
 		this.bar = bar;
 	}
@@ -30,7 +29,8 @@ public abstract class PowerUp extends GameComponent {
 	}
 	
 	public void setDoodle(Doodle doodle) {
-		if(bar != null) throw new IllegalArgumentException("Bar is not null.");
+		if(bar != null)
+			throw new IllegalArgumentException("Bar is not null.");
 		
 		this.doodle = doodle;
 	}
@@ -80,6 +80,6 @@ public abstract class PowerUp extends GameComponent {
 	@Override
 	public void draw(Graphics2D g) {
 		if(powerup != null)
-			g.drawImage(powerupImage,getIntX(),getIntY(),null);
+			g.drawImage(powerupImage, getIntX(), getIntY(), null);
 	}
 }

@@ -1,6 +1,5 @@
 package com.ra4king.jdoodlejump;
 
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -41,7 +40,7 @@ public class Themes {
 		String[][] images2 = new String[images.length][2];
 		for(int a = 0; a < images.length; a++) {
 			images2[a][0] = images[a];
-			images2[a][1] = Art.getFileName(images[a])+(themes.size() == 0 ? "" : themes.size());
+			images2[a][1] = Art.getFileName(images[a]) + (themes.size() == 0 ? "" : themes.size());
 		}
 		
 		addTheme(images2);
@@ -102,7 +101,7 @@ public class Themes {
 	}
 	
 	public void rotateThemes() {
-		setCurrentTheme((currentTheme+1)%themes.size());
+		setCurrentTheme((currentTheme + 1) % themes.size());
 	}
 	
 	public void putSetting(String setting, Object value) {

@@ -35,10 +35,11 @@ public abstract class Bar extends GameComponent {
 	}
 	
 	public void installMonster(StationaryMonster m) {
-		if(powerup != null) throw new IllegalArgumentException("PowerUp is already installed.");
+		if(powerup != null)
+			throw new IllegalArgumentException("PowerUp is already installed.");
 		
-		m.setX(getX()+(getWidth()-m.getWidth())/2);
-		m.setY(getY()-m.getHeight()-5);
+		m.setX(getX() + (getWidth() - m.getWidth()) / 2);
+		m.setY(getY() - m.getHeight() - 5);
 		m.setBar(this);
 		
 		monster = m;
@@ -54,10 +55,11 @@ public abstract class Bar extends GameComponent {
 	}
 	
 	public void installPowerUp(PowerUp p) {
-		if(monster != null) throw new IllegalArgumentException("Monster is already installed.");
+		if(monster != null)
+			throw new IllegalArgumentException("Monster is already installed.");
 		
-		p.setX(getX()+(getWidth()-p.getWidth())/2);
-		p.setY(getY()-p.getHeight()-5);
+		p.setX(getX() + (getWidth() - p.getWidth()) / 2);
+		p.setY(getY() - p.getHeight() - 5);
 		p.setBar(this);
 		
 		powerup = p;
@@ -90,7 +92,7 @@ public abstract class Bar extends GameComponent {
 	
 	public void jump(Doodle doodle) {
 		doodle.setVelocityY(doodle.getMaxVelocityY());
-		doodle.setY(getY()-doodle.getHeight());
+		doodle.setY(getY() - doodle.getHeight());
 	}
 	
 	public void playSound() {

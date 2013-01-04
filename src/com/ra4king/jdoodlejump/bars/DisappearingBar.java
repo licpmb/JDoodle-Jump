@@ -4,7 +4,6 @@ import java.awt.Color;
 
 import com.ra4king.jdoodlejump.Doodle;
 
-
 public class DisappearingBar extends Bar {
 	public DisappearingBar(double x, double y) {
 		super("disappearingbar");

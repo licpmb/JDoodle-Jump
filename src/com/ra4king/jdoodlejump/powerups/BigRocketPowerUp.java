@@ -42,11 +42,11 @@ public class BigRocketPowerUp extends PowerUp {
 		doodle.setInvincible(true);
 		
 		setPowerUp(getDoodle().isFacingRight() ? "bigrocket-right" : "bigrocket-left");
-		setX(doodle.getX()-(getWidth()-doodle.getWidth())/2);
-		setY(doodle.getY()-32);
+		setX(doodle.getX() - (getWidth() - doodle.getWidth()) / 2);
+		setY(doodle.getY() - 32);
 		
 		time += deltaTime;
-		if(time >= getParent().getGame().getSound().get("rocket").getMicrosecondLength()*1000) {
+		if(time >= getParent().getGame().getSound().get("rocket").getMicrosecondLength() * 1000) {
 			doodle.uninstallPowerUp(this);
 			doodle.setInvincible(false);
 			doodle.setInvisible(false);

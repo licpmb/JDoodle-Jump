@@ -47,10 +47,10 @@ public class RocketPowerUp extends PowerUp {
 		else
 			setX(doodle.getX() + doodle.getWidth());
 		
-		setY(doodle.getY() + (doodle.getHeight()-getHeight())/2 + 10);
+		setY(doodle.getY() + (doodle.getHeight() - getHeight()) / 2 + 10);
 		
 		time += deltaTime;
-		if(time >= getParent().getGame().getSound().get("rocket").getMicrosecondLength()*1000) {
+		if(time >= getParent().getGame().getSound().get("rocket").getMicrosecondLength() * 1000) {
 			doodle.uninstallPowerUp(this);
 			doodle.setInvincible(false);
 			doodle.setAbleToShoot(true);

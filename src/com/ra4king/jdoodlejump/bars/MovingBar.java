@@ -37,9 +37,9 @@ public class MovingBar extends Bar {
 		
 		if(!hasUpdated) {
 			if(isHoriz)
-				bounds.setFrame(0,getY(),getParent().getWidth(),getHeight());
+				bounds.setFrame(0, getY(), getParent().getWidth(), getHeight());
 			else
-				bounds.setFrame(getX(),getY()-curDist,getWidth(),totalDist);
+				bounds.setFrame(getX(), getY() - curDist, getWidth(), totalDist);
 		}
 		
 		return bounds;
@@ -53,21 +53,21 @@ public class MovingBar extends Bar {
 			hasUpdated = true;
 		
 		if(isHoriz) {
-			setX(getX()+vx*(deltaTime/1e9));
+			setX(getX() + vx * (deltaTime / 1e9));
 			
 			if(getX() < 0.0) {
 				setX(0);
 				vx = -vx;
 			}
-			else if(getX()+getWidth() > getParent().getWidth()) {
-				setX(getParent().getWidth()-getWidth());
+			else if(getX() + getWidth() > getParent().getWidth()) {
+				setX(getParent().getWidth() - getWidth());
 				vx = -vx;
 			}
 		}
 		else {
 			double dist = getY();
-			setY(getY()+vy*(deltaTime/1e9));
-			curDist += getY()-dist;
+			setY(getY() + vy * (deltaTime / 1e9));
+			curDist += getY() - dist;
 			
 			if(curDist > totalDist) {
 				curDist = totalDist;

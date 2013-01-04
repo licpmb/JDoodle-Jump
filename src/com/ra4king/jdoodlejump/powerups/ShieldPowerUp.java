@@ -7,7 +7,6 @@ import java.awt.geom.Ellipse2D;
 
 import com.ra4king.jdoodlejump.Doodle;
 
-
 public class ShieldPowerUp extends PowerUp {
 	private Ellipse2D.Double shield;
 	private long time;
@@ -23,7 +22,7 @@ public class ShieldPowerUp extends PowerUp {
 		if(shield == null)
 			shield = new Ellipse2D.Double();
 		
-		shield.setFrame(getX(),getY(),getWidth(),getHeight());
+		shield.setFrame(getX(), getY(), getWidth(), getHeight());
 		
 		return shield;
 	}
@@ -58,11 +57,11 @@ public class ShieldPowerUp extends PowerUp {
 		doodle.setInvincible(true);
 		
 		if(doodle.isFacingRight())
-			setX(doodle.getX()-((getWidth()/2)-20));
+			setX(doodle.getX() - ((getWidth() / 2) - 20));
 		else
-			setX(doodle.getX()-((getWidth()/2)-10));
+			setX(doodle.getX() - ((getWidth() / 2) - 10));
 		
-		setY(doodle.getY()-((getHeight()/2)-21));
+		setY(doodle.getY() - ((getHeight() / 2) - 21));
 		
 		time += deltaTime;
 		if(time >= 15000000000L) {
@@ -73,12 +72,13 @@ public class ShieldPowerUp extends PowerUp {
 	
 	@Override
 	public void draw(Graphics2D g) {
-		if(getX()+getHeight() < 0) return;
+		if(getX() + getHeight() < 0)
+			return;
 		
-		if(time > 12000000000L && System.currentTimeMillis()/10%2 == 0)
+		if(time > 12000000000L && System.currentTimeMillis() / 10 % 2 == 0)
 			return;
 		else {
-			g.setPaint(new GradientPaint((float)(getX()+getWidth()/2),(float)getY(),new Color(255,255,255,100),(float)(getX()+getWidth()/2),(float)(getY()+getHeight()),new Color(0,0,255,100)));
+			g.setPaint(new GradientPaint((float)(getX() + getWidth() / 2), (float)getY(), new Color(255, 255, 255, 100), (float)(getX() + getWidth() / 2), (float)(getY() + getHeight()), new Color(0, 0, 255, 100)));
 			Ellipse2D.Double e = getShield();
 			g.fill(e);
 			g.setColor(Color.lightGray);

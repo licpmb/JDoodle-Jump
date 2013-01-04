@@ -1,12 +1,10 @@
 package com.ra4king.jdoodlejump.monsters;
 
-
 import java.awt.geom.Rectangle2D;
 
 import com.ra4king.gameutils.util.FastMath;
 import com.ra4king.jdoodlejump.Doodle;
 import com.ra4king.jdoodlejump.bars.Bar;
-
 
 public class StationaryMonster extends Monster {
 	private Bar bar;
@@ -14,7 +12,7 @@ public class StationaryMonster extends Monster {
 	private long lastTime;
 	
 	public StationaryMonster(int num, int hitsTotal) {
-		super("monster"+num,hitsTotal);
+		super("monster" + num, hitsTotal);
 	}
 	
 	@Override
@@ -47,7 +45,7 @@ public class StationaryMonster extends Monster {
 		
 		if(getHitsCount() >= getHitsTotal()) {
 			getParent().remove(this);
-			checkStopSound();			
+			checkStopSound();
 			getParent().getGame().getSound().play("monsterdeath");
 		}
 	}
@@ -82,14 +80,14 @@ public class StationaryMonster extends Monster {
 		super.update(deltaTime);
 		
 		long diff;
-		if((diff = System.nanoTime()-lastTime) >= 1e9/60) {
+		if((diff = System.nanoTime() - lastTime) >= 1e9 / 60) {
 			lastTime += diff;
 			
-			count += (Math.random()+1)*500.0/60.0;
+			count += (Math.random() + 1) * 500.0 / 60.0;
 			
 			super.setX(getX() + FastMath.cosDeg(count));
 			
-			super.setY(getY() + FastMath.sinDeg(count/.7)/5);
+			super.setY(getY() + FastMath.sinDeg(count / .7) / 5);
 		}
 	}
 }

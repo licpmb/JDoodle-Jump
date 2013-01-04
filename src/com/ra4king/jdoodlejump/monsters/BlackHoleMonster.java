@@ -4,13 +4,12 @@ import java.awt.geom.Rectangle2D;
 
 import com.ra4king.jdoodlejump.Doodle;
 
-
 public class BlackHoleMonster extends Monster {
 	private Doodle doodle;
 	private long time;
 	
 	public BlackHoleMonster(double x, double y) {
-		super("blackhole",1);
+		super("blackhole", 1);
 		
 		setX(x);
 		setY(y);
@@ -19,7 +18,7 @@ public class BlackHoleMonster extends Monster {
 	@Override
 	public Rectangle2D.Double getBounds() {
 		Rectangle2D.Double bounds = super.getBounds();
-		bounds.setFrame(getX()+15,getY()+15,getWidth()-30,getHeight()-30);
+		bounds.setFrame(getX() + 15, getY() + 15, getWidth() - 30, getHeight() - 30);
 		return bounds;
 	}
 	
@@ -56,9 +55,9 @@ public class BlackHoleMonster extends Monster {
 		
 		if(doodle != null) {
 			doodle.setVelocityY(0);
-			doodle.setX(getX()+(getWidth()-doodle.getWidth())/2);
-			doodle.setY(getY()+(getHeight()-doodle.getHeight())/2);
-			doodle.setScale(doodle.getScale()*0.99);
+			doodle.setX(getX() + (getWidth() - doodle.getWidth()) / 2);
+			doodle.setY(getY() + (getHeight() - doodle.getHeight()) / 2);
+			doodle.setScale(doodle.getScale() * 0.99);
 			
 			time += deltaTime;
 			

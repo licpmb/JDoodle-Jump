@@ -1,6 +1,5 @@
 package com.ra4king.jdoodlejump;
 
-
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
@@ -55,8 +54,8 @@ public class Level extends GameWorld {
 						break;
 					case KeyEvent.VK_SPACE:
 						if(!doodle.isShooting() && doodle.isAbleToShoot()) {
-							add(2,new Bullet(score,new Point2D.Double(doodle.getX()+doodle.getWidth()/2,doodle.getY()),
-											new Point2D.Double(doodle.getX()+doodle.getWidth()/2,doodle.getY()-100)));
+							add(2, new Bullet(score, new Point2D.Double(doodle.getX() + doodle.getWidth() / 2, doodle.getY()),
+									new Point2D.Double(doodle.getX() + doodle.getWidth() / 2, doodle.getY() - 100)));
 							doodle.setShooting(true);
 							game.getSound().play("shoot");
 						}
@@ -105,7 +104,7 @@ public class Level extends GameWorld {
 				}
 				else {
 					if(useMouse) {
-						int diff = me.getX()-mouseX;
+						int diff = me.getX() - mouseX;
 						if(diff != 0)
 							doodle.setFacingRight(diff > 0);
 					}
@@ -115,7 +114,7 @@ public class Level extends GameWorld {
 			
 			@Override
 			public void mouseDragged(MouseEvent me, Screen screen) {
-				mouseMoved(me,screen);
+				mouseMoved(me, screen);
 			}
 			
 			@Override
@@ -124,7 +123,7 @@ public class Level extends GameWorld {
 					return;
 				
 				if(me.getButton() == MouseEvent.BUTTON1 && doodle.isAbleToShoot()) {
-					add(2,new Bullet(score,new Point2D.Double(doodle.getX()+doodle.getWidth()/2,doodle.getY()),new Point2D.Double(me.getX(),me.getY()-getYOffset())));
+					add(2, new Bullet(score, new Point2D.Double(doodle.getX() + doodle.getWidth() / 2, doodle.getY()), new Point2D.Double(me.getX(), me.getY() - getYOffset())));
 					doodle.setShooting(true);
 					game.getSound().play("shoot");
 				}
@@ -155,7 +154,7 @@ public class Level extends GameWorld {
 		super.resumed();
 		
 		if(pauseStart > 0)
-			pauseTime += System.currentTimeMillis()-pauseStart;
+			pauseTime += System.currentTimeMillis() - pauseStart;
 		
 		pauseStart = 0;
 	}
@@ -167,32 +166,32 @@ public class Level extends GameWorld {
 	
 	@Override
 	public void update(long deltaTime) {
-		try{
+		try {
 			if(useMouse) {
 				double change = mouseX - doodle.getCenterX();
 				
-				if(Math.abs(change) <= mouseSpeed*(deltaTime/1e9))
+				if(Math.abs(change) <= mouseSpeed * (deltaTime / 1e9))
 					doodle.setX(doodle.getX() + change);
 				else if(change > 0)
-					doodle.setX(doodle.getX()+(mouseSpeed*(deltaTime/1e9)));
+					doodle.setX(doodle.getX() + (mouseSpeed * (deltaTime / 1e9)));
 				else if(change < 0)
-					doodle.setX(doodle.getX()-(mouseSpeed*(deltaTime/1e9)));
+					doodle.setX(doodle.getX() - (mouseSpeed * (deltaTime / 1e9)));
 			}
 			else {
 				if(getGame().getInput().isKeyDown(KeyEvent.VK_LEFT) || getGame().getInput().isKeyDown(KeyEvent.VK_A)) {
-					doodle.setX(doodle.getX()-(doodleSpeed*(deltaTime/1e9)));
+					doodle.setX(doodle.getX() - (doodleSpeed * (deltaTime / 1e9)));
 					doodle.setFacingRight(false);
 				}
 				
 				if(getGame().getInput().isKeyDown(KeyEvent.VK_RIGHT) || getGame().getInput().isKeyDown(KeyEvent.VK_D)) {
-					doodle.setX(doodle.getX()+(doodleSpeed*(deltaTime/1e9)));
+					doodle.setX(doodle.getX() + (doodleSpeed * (deltaTime / 1e9)));
 					doodle.setFacingRight(true);
 				}
 				
-				if(doodle.getX()+doodle.getWidth()/2 > getWidth())
-					doodle.setX(-doodle.getWidth()/2);
-				else if(doodle.getX()+doodle.getWidth()/2 < 0)
-					doodle.setX(getWidth()-doodle.getWidth()/2);
+				if(doodle.getX() + doodle.getWidth() / 2 > getWidth())
+					doodle.setX(-doodle.getWidth() / 2);
+				else if(doodle.getX() + doodle.getWidth() / 2 < 0)
+					doodle.setX(getWidth() - doodle.getWidth() / 2);
 			}
 			
 			super.update(deltaTime);
@@ -203,23 +202,23 @@ public class Level extends GameWorld {
 				if(level < 30)
 					level++;
 				
-				generator.loadWorld(doodle,level,2000);
+				generator.loadWorld(doodle, level, 2000);
 			}
 			
-			if(doodle.getScreenY() > limit && limit > getHeight()/2) {
-				limit -= (300*(deltaTime/1e9));
+			if(doodle.getScreenY() > limit && limit > getHeight() / 2) {
+				limit -= (300 * (deltaTime / 1e9));
 				
-				if(limit < getHeight()/2)
-					limit = getHeight()/2;
+				if(limit < getHeight() / 2)
+					limit = getHeight() / 2;
 				
 				setYOffset(limit - doodle.getY());
 			}
-			else if(doodle.getScreenY() < getHeight()/2) {
-				double dist = getHeight()/2-doodle.getScreenY();
+			else if(doodle.getScreenY() < getHeight() / 2) {
+				double dist = getHeight() / 2 - doodle.getScreenY();
 				
 				score.add(dist);
 				
-				setYOffset(getHeight()/2-doodle.getY());
+				setYOffset(getHeight() / 2 - doodle.getY());
 			}
 			
 			if(doodle.isHit()) {
@@ -232,12 +231,11 @@ public class Level extends GameWorld {
 				
 				gameOver();
 				
-				getGame().submit(score.getInt(),System.currentTimeMillis()-startTime-pauseTime,isNewHighscore);
+				getGame().submit(score.getInt(), System.currentTimeMillis() - startTime - pauseTime, isNewHighscore);
 			}
-		}
-		catch(Exception exc) {
+		} catch(Exception exc) {
 			exc.printStackTrace();
-			JOptionPane.showMessageDialog(getGame(),"<html>ERROR!<br />Error message: " + exc);
+			JOptionPane.showMessageDialog(getGame(), "<html>ERROR!<br />Error message: " + exc);
 			gameOver();
 		}
 	}
@@ -250,21 +248,20 @@ public class Level extends GameWorld {
 		level = 0;
 		limit = getHeight();
 		
-		mouseX = getWidth()/2;
+		mouseX = getWidth() / 2;
 		
 		getGame().getInput().reset();
 		
 		setYOffset(0);
 		
-		doodle = (Doodle)add(3,new Doodle(score,true));
+		doodle = (Doodle)add(3, new Doodle(score, true));
 		
-		doodle.setLocation(getWidth()/2, 450);
+		doodle.setLocation(getWidth() / 2, 450);
 		
-		try{
-			generator.loadWorld(doodle,level,2000);
-		}
-		catch(Exception exc) {
-			JOptionPane.showMessageDialog(null,"Error loading game");
+		try {
+			generator.loadWorld(doodle, level, 2000);
+		} catch(Exception exc) {
+			JOptionPane.showMessageDialog(null, "Error loading game");
 			getGame().setScreen("Menus");
 		}
 		

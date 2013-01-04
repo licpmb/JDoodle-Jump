@@ -4,7 +4,6 @@ import java.awt.geom.Rectangle2D;
 
 import com.ra4king.jdoodlejump.Doodle;
 
-
 public class BreakingBar extends Bar {
 	private boolean broken;
 	
@@ -36,7 +35,7 @@ public class BreakingBar extends Bar {
 		Rectangle2D.Double bounds = super.getBounds();
 		
 		if(broken)
-			bounds.setFrame(0,0,0,0);
+			bounds.setFrame(0, 0, 0, 0);
 		
 		return bounds;
 	}
@@ -46,6 +45,6 @@ public class BreakingBar extends Bar {
 		super.update(deltaTime);
 		
 		if(broken)
-			setY(getY()+(420*(deltaTime/1e9)));
+			setY(getY() + (420 * (deltaTime / 1e9)));
 	}
 }

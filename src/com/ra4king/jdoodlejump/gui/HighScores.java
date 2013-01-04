@@ -1,6 +1,5 @@
 package com.ra4king.jdoodlejump.gui;
 
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
@@ -41,14 +40,14 @@ public class HighScores extends Widget {
 		this.version = version;
 		
 		{
-			int x[] = {50,80,80};
-			int y[] = {450,435,465};
-			prevPage = new Polygon(x,y,3);
+			int x[] = { 50, 80, 80 };
+			int y[] = { 450, 435, 465 };
+			prevPage = new Polygon(x, y, 3);
 		}
 		{
-			int x[] = {370,370,400};
-			int y[] = {435,465,450};
-			nextPage = new Polygon(x,y,3);
+			int x[] = { 370, 370, 400 };
+			int y[] = { 435, 465, 450 };
+			nextPage = new Polygon(x, y, 3);
 		}
 		
 		highScores[0] = new String[100][2];
@@ -77,10 +76,10 @@ public class HighScores extends Widget {
 			}
 		};
 		
-		iButtons[0] = new Button("TODAY",20,22,175,5,5,false,action);
-		iButtons[1] = new Button("WEEK",20,iButtons[0].getIntX()+iButtons[0].getIntWidth()+1,175,5,5,false,action);
-		iButtons[2] = new Button("MONTH",20,iButtons[1].getIntX()+iButtons[1].getIntWidth()+1,175,5,5,false,action);
-		iButtons[3] = new Button("ALL TIME",20,iButtons[2].getIntX()+iButtons[2].getIntWidth()+1,175,5,5,false,action);
+		iButtons[0] = new Button("TODAY", 20, 22, 175, 5, 5, false, action);
+		iButtons[1] = new Button("WEEK", 20, iButtons[0].getIntX() + iButtons[0].getIntWidth() + 1, 175, 5, 5, false, action);
+		iButtons[2] = new Button("MONTH", 20, iButtons[1].getIntX() + iButtons[1].getIntWidth() + 1, 175, 5, 5, false, action);
+		iButtons[3] = new Button("ALL TIME", 20, iButtons[2].getIntX() + iButtons[2].getIntWidth() + 1, 175, 5, 5, false, action);
 		
 		for(Button b : iButtons) {
 			b.setBackground(Color.white);
@@ -102,7 +101,7 @@ public class HighScores extends Widget {
 		for(Button b : iButtons)
 			page.add(b);
 		
-		page.add(new Label("High Scores",Color.green,30,parent.getGame().getWidth()/2,145,true));
+		page.add(new Label("High Scores", Color.green, 30, parent.getGame().getWidth() / 2, 145, true));
 		
 		page.getGame().addInputListener("Highscores Menu", new InputAdapter() {
 			public void mouseMoved(MouseEvent me, Screen screen) {
@@ -120,11 +119,13 @@ public class HighScores extends Widget {
 				
 				if(nextPage.contains(me.getPoint())) {
 					pageNum[iNum]++;
-					if(pageNum[iNum] > highScores[iNum].length/10-1) pageNum[iNum] = 0;
+					if(pageNum[iNum] > highScores[iNum].length / 10 - 1)
+						pageNum[iNum] = 0;
 				}
 				else if(prevPage.contains(me.getPoint())) {
 					pageNum[iNum]--;
-					if(pageNum[iNum] < 0) pageNum[iNum] = highScores[iNum].length/10-1;
+					if(pageNum[iNum] < 0)
+						pageNum[iNum] = highScores[iNum].length / 10 - 1;
 				}
 			}
 		});
@@ -153,8 +154,8 @@ public class HighScores extends Widget {
 				networkActive = true;
 				
 				SocketPacketIO io = null;
-				try{
-					io = new SocketPacketIO(SERVER,PORT,128*1024);
+				try {
+					io = new SocketPacketIO(SERVER, PORT, 128 * 1024);
 					
 					Packet p = new Packet();
 					p.writeString("DoodleJump game");
@@ -164,11 +165,11 @@ public class HighScores extends Widget {
 					p.writeInt(0);
 					io.write(p);
 					
-					try{
+					try {
 						double serverVer = io.read().readDouble();
-						if(version < serverVer) System.out.println("NEW UPDATE!");
-					}
-					catch(Exception exc) {
+						if(version < serverVer)
+							System.out.println("NEW UPDATE!");
+					} catch(Exception exc) {
 						exc.printStackTrace();
 					}
 					
@@ -176,7 +177,7 @@ public class HighScores extends Widget {
 					p.writeInt(2);
 					io.write(p);
 					
-					try{
+					try {
 						for(int iNum = 0; iNum < 4; iNum++) {
 							Packet packet = io.read();
 							for(int a = 0; a < highScores[iNum].length; a++) {
@@ -199,26 +200,23 @@ public class HighScores extends Widget {
 									highScores[iNum][a][1] = "            " + highScores[iNum][a][1];
 							}
 						}
-					}
-					catch(Exception exc) {
+					} catch(Exception exc) {
 						exc.printStackTrace();
 					}
 					
 					p = new Packet();
 					p.writeInt(-1);
 					io.write(p);
-				}
-				catch(Exception exc) {
+				} catch(Exception exc) {
 					exc.printStackTrace();
 					
 					for(int a = 0; a < 4; a++)
 						highScores[a][0][0] = "Connection Error";
-				}
-				finally {
-					try{
+				} finally {
+					try {
 						io.close();
+					} catch(Exception exc) {
 					}
-					catch(Exception exc) {}
 					
 					networkActive = false;
 				}
@@ -229,13 +227,13 @@ public class HighScores extends Widget {
 	public void submitScore(final int points, final long duration, boolean isNewHighscore) {
 		if(points > 0) {
 			while(name == null || name.equals("")) {
-				name = JOptionPane.showInputDialog(getParent().getGame().getRootParent(),"Type your name:");
+				name = JOptionPane.showInputDialog(getParent().getGame().getRootParent(), "Type your name:");
 				
 				if(name == null)
 					return;
 				else if(name.length() > 25) {
-					JOptionPane.showMessageDialog(getParent().getGame().getRootParent(),"Names longer than 25 character are not allowed.");
-					name =  "";
+					JOptionPane.showMessageDialog(getParent().getGame().getRootParent(), "Names longer than 25 character are not allowed.");
+					name = "";
 				}
 				else
 					name = name.trim();
@@ -250,8 +248,8 @@ public class HighScores extends Widget {
 					networkActive = true;
 					
 					SocketPacketIO io = null;
-					try{
-						io = new SocketPacketIO(SERVER,PORT);
+					try {
+						io = new SocketPacketIO(SERVER, PORT);
 						
 						Packet p = new Packet();
 						p.writeString("DoodleJump game");
@@ -261,19 +259,18 @@ public class HighScores extends Widget {
 						p.writeInt(0);
 						io.write(p);
 						
-						try{
+						try {
 							double serverVer = io.read().readDouble();
 							if(version < serverVer && !hasShownUpdate) {
 								if(getParent().getGame().isApplet())
-									JOptionPane.showMessageDialog(getParent().getGame(),"<html>New Update! New version: " + serverVer + "<br><br>Please refresh the page...");
+									JOptionPane.showMessageDialog(getParent().getGame(), "<html>New Update! New version: " + serverVer + "<br><br>Please refresh the page...");
 								else {
-									JOptionPane.showMessageDialog(getParent().getGame().getRootParent(),"<html>New Update! New version: " + serverVer + "<br><br>Please restart this game...");
+									JOptionPane.showMessageDialog(getParent().getGame().getRootParent(), "<html>New Update! New version: " + serverVer + "<br><br>Please restart this game...");
 									System.exit(0);
 								}
 								hasShownUpdate = true;
 							}
-						}
-						catch(Exception exc) {
+						} catch(Exception exc) {
 							exc.printStackTrace();
 						}
 						
@@ -288,13 +285,12 @@ public class HighScores extends Widget {
 						p = new Packet();
 						p.writeInt(-1);
 						io.write(p);
-					}
-					catch(Exception exc) {}
-					finally {
-						try{
+					} catch(Exception exc) {
+					} finally {
+						try {
 							io.close();
+						} catch(Exception exc) {
 						}
-						catch(Exception exc) {}
 						
 						networkActive = false;
 					}
@@ -318,12 +314,12 @@ public class HighScores extends Widget {
 	@Override
 	public void draw(Graphics2D g) {
 		g.setColor(Color.black);
-		g.setFont(new Font(Font.SANS_SERIF,Font.BOLD,20));
+		g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 20));
 		
-		for(int a = pageNum[iNum]*10; a < pageNum[iNum]*10+10; a++) {
-			g.drawString(""+(a+1),30,235+((a%10)*20));
-			g.drawString(highScores[iNum][a][0],80,235+((a%10)*20));
-			g.drawString(highScores[iNum][a][1],380,235+((a%10)*20));
+		for(int a = pageNum[iNum] * 10; a < pageNum[iNum] * 10 + 10; a++) {
+			g.drawString("" + (a + 1), 30, 235 + ((a % 10) * 20));
+			g.drawString(highScores[iNum][a][0], 80, 235 + ((a % 10) * 20));
+			g.drawString(highScores[iNum][a][1], 380, 235 + ((a % 10) * 20));
 		}
 		
 		g.setColor(Color.red);
@@ -345,10 +341,9 @@ public class HighScores extends Widget {
 		if(getParent().getGame().isApplet()) {
 			try {
 				JSObject object = JSObject.getWindow(getParent().getGame());
-				object.eval("document.cookie='name="+name+";expires=Thurs, 31 Dec 2999 23:59:59 GMT';");
-				object.eval("document.cookie='score="+highscore+";expires=Thurs, 31 Dec 2999 23:59:59 GMT';");
-			}
-			catch(Exception exc) {
+				object.eval("document.cookie='name=" + name + ";expires=Thurs, 31 Dec 2999 23:59:59 GMT';");
+				object.eval("document.cookie='score=" + highscore + ";expires=Thurs, 31 Dec 2999 23:59:59 GMT';");
+			} catch(Exception exc) {
 				exc.printStackTrace();
 			}
 		}
@@ -358,8 +353,8 @@ public class HighScores extends Widget {
 				prefs = prefs.node("JDoodleJump");
 				prefs.put("name", name);
 				prefs.putInt("highscore", highscore);
+			} catch(Exception exc) {
 			}
-			catch(Exception exc) {}
 		}
 	}
 	
@@ -379,8 +374,7 @@ public class HighScores extends Widget {
 				}
 				
 				return score;
-			}
-			catch(Throwable exc) {
+			} catch(Throwable exc) {
 				exc.printStackTrace();
 				return 0;
 			}
@@ -392,8 +386,7 @@ public class HighScores extends Widget {
 				prefs.flush();
 				name = prefs.get("name", null);
 				return prefs.getInt("highscore", 0);
-			}
-			catch(Throwable exc) {
+			} catch(Throwable exc) {
 				return 0;
 			}
 		}

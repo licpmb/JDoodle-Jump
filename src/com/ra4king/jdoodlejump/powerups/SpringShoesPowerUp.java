@@ -33,7 +33,7 @@ public class SpringShoesPowerUp extends PowerUp {
 		doodleHeight = (int)doodle.getHeight();
 		doodleIntersectDist = doodle.getIntersection();
 		doodle.setMaxVelocityY(1200);
-		doodle.setHeight(doodleHeight+getHeight()-6);
+		doodle.setHeight(doodleHeight + getHeight() - 6);
 		doodle.setIntersection((int)getHeight());
 	}
 	

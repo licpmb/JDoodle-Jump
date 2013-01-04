@@ -1,11 +1,9 @@
 package com.ra4king.jdoodlejump.monsters;
 
-
 import java.awt.geom.Rectangle2D;
 
 import com.ra4king.gameutils.Entity;
 import com.ra4king.jdoodlejump.Doodle;
-
 
 public class AlienMonster extends Monster {
 	private Doodle doodle;
@@ -14,7 +12,7 @@ public class AlienMonster extends Monster {
 	private static boolean isLoopingSound;
 	
 	public AlienMonster(double x, double y) {
-		super("alien",1);
+		super("alien", 1);
 		
 		setX(x);
 		setY(y);
@@ -34,14 +32,14 @@ public class AlienMonster extends Monster {
 	@Override
 	public Rectangle2D.Double getJumpBounds() {
 		Rectangle2D.Double bounds = getBounds();
-		bounds.setFrame(getX(),getY(),getWidth(),30);
+		bounds.setFrame(getX(), getY(), getWidth(), 30);
 		return bounds;
 	}
 	
 	@Override
 	public Rectangle2D.Double getHitBounds() {
 		Rectangle2D.Double bounds = getBounds();
-		bounds.setFrame(getX(),getY()+50,getWidth(),getHeight()-50);
+		bounds.setFrame(getX(), getY() + 50, getWidth(), getHeight() - 50);
 		return bounds;
 	}
 	
@@ -87,8 +85,8 @@ public class AlienMonster extends Monster {
 		
 		if(doodle != null) {
 			doodle.setVelocityY(0);
-			doodle.setX(getX()+(getWidth()-doodle.getWidth())/2);
-			doodle.setY(getY()+getHeight()-doodle.getHeight()-((time/2e7)));
+			doodle.setX(getX() + (getWidth() - doodle.getWidth()) / 2);
+			doodle.setY(getY() + getHeight() - doodle.getHeight() - ((time / 2e7)));
 			time += deltaTime;
 			
 			if(time >= 1e9)

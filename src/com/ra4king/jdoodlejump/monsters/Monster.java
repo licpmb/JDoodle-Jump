@@ -65,7 +65,7 @@ public abstract class Monster extends GameComponent {
 	@Override
 	public Rectangle2D.Double getBounds() {
 		Rectangle2D.Double bounds = super.getBounds();
-		bounds.setFrame(bounds.x+5,bounds.y+5,bounds.width-10,bounds.height-10);
+		bounds.setFrame(bounds.x + 5, bounds.y + 5, bounds.width - 10, bounds.height - 10);
 		return bounds;
 	}
 	
@@ -98,8 +98,8 @@ public abstract class Monster extends GameComponent {
 		}
 		
 		if(isFalling > -1) {
-			setY(getY()+(600*(deltaTime/1e9)));
-			isFalling += (600*(deltaTime/1e9));
+			setY(getY() + (600 * (deltaTime / 1e9)));
+			isFalling += (600 * (deltaTime / 1e9));
 			
 			if(isFalling >= 80) {
 				isFalling = -1;
@@ -115,9 +115,9 @@ public abstract class Monster extends GameComponent {
 	@Override
 	public void draw(Graphics2D g) {
 		if(!hit)
-			g.drawImage(monsterImage,getIntX(),getIntY(),null);
+			g.drawImage(monsterImage, getIntX(), getIntY(), null);
 		else {
-			g.drawImage(monsterImage,getIntX(),getIntY(),Color.red,null);
+			g.drawImage(monsterImage, getIntX(), getIntY(), Color.red, null);
 			count++;
 			if(count > 5) {
 				count = 0;
@@ -126,7 +126,7 @@ public abstract class Monster extends GameComponent {
 		}
 		
 		if(Themes.getThemes().isDebug()) {
-			g.setColor(new Color(255,0,0,100));
+			g.setColor(new Color(255, 0, 0, 100));
 			g.fill(getBounds());
 		}
 	}
